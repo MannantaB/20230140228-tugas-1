@@ -35,9 +35,9 @@
                                 <label for="qty" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     Quantity <span class="text-red-500">*</span>
                                 </label>
-                                <input type="number" id="qty" name="qty" value="{{ old('qty', $product->qty) }}" placeholder="0"
-                                       class="w-full px-4 py-2.5 rounded-lg border {{ $errors->has('qty') ? 'border-red-500 ring-red-200' : 'border-gray-300 dark:border-gray-600' }} bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-4 focus:ring-indigo-100 focus:border-indigo-500 outline-none transition">
-                                @error('qty')
+                                <input type="number" id="qty" name="quantity" value="{{ old('quantity', $product->quantity) }}" placeholder="0"
+                                       class="w-full px-4 py-2.5 rounded-lg border {{ $errors->has('quantity') ? 'border-red-500 ring-red-200' : 'border-gray-300 dark:border-gray-600' }} bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-4 focus:ring-indigo-100 focus:border-indigo-500 outline-none transition">
+                                @error('quantity')
                                     <p class="mt-1.5 text-xs text-red-500 italic">{{ $message }}</p>
                                 @enderror
                             </div>
