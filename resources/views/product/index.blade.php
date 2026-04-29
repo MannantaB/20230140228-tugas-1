@@ -8,9 +8,7 @@
                             <h2 class="text-xl font-semibold">Product List</h2>
                             <p class="text-sm text-gray-600 dark:text-gray-400">Manage your product inventory</p>
                         </div>
-                        <a href="{{ route('product.create') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:ring ring-indigo-300 disabled:opacity-25 transition ease-in-out duration-150">
-                            Add Product
-                        </a>
+                        <x-add-product :url="route('product.create')" :name="'Product'" />
                     </div>
 
                     @if(session('success'))
