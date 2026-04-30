@@ -1,34 +1,38 @@
 <x-app-layout>
-    <div class="py-12">
+    <div class="py-12 bg-gray-900 min-h-[60vh]">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+            <div class="bg-gray-800/70 backdrop-blur-sm overflow-hidden shadow-lg rounded-2xl border border-gray-700">
+                <div class="p-8 text-gray-100">
                     <div class="flex items-center justify-between mb-8">
                         <div class="flex items-center gap-4">
-                            <a href="{{ route('product.index') }}" class="p-1.5 rounded-md text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                            <a href="{{ route('product.index') }}" class="p-2 rounded-md text-gray-400 hover:bg-gray-700 transition">
                                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                                 </svg>
                             </a>
                             <div>
-                                <h2 class="text-2xl font-bold">Product Details</h2>
-                                <p class="text-sm text-gray-500 italic">Viewing product #{{ $product->id }}</p>
+                                <h2 class="text-2xl font-semibold">Product Details</h2>
+                                <p class="text-sm text-gray-400 italic">Viewing product #{{ $product->id }}</p>
                             </div>
                         </div>
 
                         <div class="flex items-center gap-3">
                             @can('update', $product)
-                                <x-edit-button :url="route('product.edit', $product->id)" />
+                                <a href="{{ route('product.edit', $product->id) }}" class="px-3 py-1.5 text-xs font-medium text-gray-900 bg-yellow-400 rounded hover:bg-yellow-500">Edit</a>
                             @endcan
 
                             @can('delete', $product)
-                                <x-delete-button :url="route('product.delete', $product->id)" />
+                                <form action="{{ route('product.delete', $product->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="px-3 py-1.5 text-xs font-medium text-white bg-red-600 rounded hover:bg-red-700">Delete</button>
+                                </form>
                             @endcan
                         </div>
                     </div>
 
-                    <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600 overflow-hidden">
-                        <div class="divide-y divide-gray-200 dark:divide-gray-600">
+                    <div class="bg-gray-700/30 rounded-xl border border-gray-700 overflow-hidden">
+                        <div class="divide-y divide-gray-700">
                             <!-- Name -->
                             <div class="grid grid-cols-3 px-6 py-4">
                                 <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Product Name</div>

@@ -26,6 +26,7 @@ class UpdateProductRequest extends FormRequest
             'quantity' => 'required|integer',
             'price' => 'required|numeric',
             'user_id' => 'required|exists:users,id',
+            'category_id' => 'nullable|exists:categories,id',
         ];
     }
 
