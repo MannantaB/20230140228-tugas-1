@@ -2,9 +2,14 @@
 
 namespace App\Providers;
 
+use Dedoc\Scramble\Scramble;
+use Dedoc\Scramble\Support\Generator\OpenApi;
+use Dedoc\Scramble\Support\Generator\SecurityScheme;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
+use Illuminate\Routing\Route;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +28,24 @@ class AppServiceProvider extends ServiceProvider
     {
         Gate::define('manage-product', function (User $user) {
             return $user->role === 'admin';
+        });
+
+        Gate::define('manage-category', function (User $user) {
+            return $user->role === 'admin';
+        });
+
+        Scramble::configure()
+            ->routes(function (Route $route) {
+                return Str::startsWith($route->uri, 'api/');
+            })
+            ->withDocumentTransformers(function (OpenApi $openApi) {
+                $openApi->secure(
+                    SecurityScheme::http('bearer')
+                );
+            });
+
+        Gate::define('viewApiDocs', function () {
+            return true;
         });
     }
 }
